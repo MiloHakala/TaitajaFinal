@@ -29,8 +29,16 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         // Disable panels at start.
-        pauseMenuUI.SetActive(false);
-        howToPlayPanel.SetActive(false);
+        if (pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(false);
+        }
+       
+        if (howToPlayPanel != null)
+        {
+            howToPlayPanel.SetActive(false);
+        }
+            
         /*
         // Store original positions/scales for pause menu buttons.
         if (pauseButtons.Length > 0)
