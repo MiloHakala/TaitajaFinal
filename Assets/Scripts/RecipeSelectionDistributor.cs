@@ -38,13 +38,13 @@ public class RecipeSelectionDistributor : MonoBehaviour
         {
             switch (card.type)
             {
-                case RecipeType.Tool:
+                case RecipeType.Cookable:
                     toolRecipes.Add(card);
                     break;
                 case RecipeType.Seasoning:
                     seasoningRecipes.Add(card);
                     break;
-                case RecipeType.Food:
+                case RecipeType.Choppable:
                     foodRecipes.Add(card);
                     break;
             }
