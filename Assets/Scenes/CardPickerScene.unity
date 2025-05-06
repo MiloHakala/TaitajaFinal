@@ -825,6 +825,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5cfc82a8b722c2640b4bed0e63fd256f, type: 2}
   - {fileID: 11400000, guid: 26bf7f678ecb9484399a1ddfe2f64e56, type: 2}
   - {fileID: 11400000, guid: 77032e5038582f74e8f6e8459da90b77, type: 2}
+  - {fileID: 11400000, guid: 525452623ecdd1f4bb4b52afa98606d0, type: 2}
+  - {fileID: 11400000, guid: 0e860762a1584bf49b6dd428f31cbfdb, type: 2}
   infoText: {fileID: 2014332373}
   continueButton: {fileID: 1208695707}
   gameScene: GameScene
@@ -878,7 +880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000076294, y: -73}
+  m_AnchoredPosition: {x: -0.0000076294, y: -74.9}
   m_SizeDelta: {x: 526.8605, y: 68.158905}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1784680394
@@ -1007,9 +1009,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc276b76f5eab8143826a163dd223639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolRecipes: []
+  cookableRecipes: []
+  choppableRecipes: []
   seasoningRecipes: []
-  foodRecipes: []
+  knifeTools: []
+  fryingPanTools: []
 --- !u!4 &1822412721
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public enum RecipeType
     Seasoning,
     Cookable,
     Choppable,
+    Knife,
+    FryingPan,
 }
 
 [CreateAssetMenu(fileName = "NewRecipeCard", menuName = "Card/RecipeCard")]

@@ -6,13 +6,15 @@ public class RecipeSelectionDistributor : MonoBehaviour
     public static RecipeSelectionDistributor Instance { get; private set; }
 
     [Header("Outputs (populated at runtime)")]
-    public List<RecipeCard> toolRecipes = new List<RecipeCard>();
+    public List<RecipeCard> cookableRecipes = new List<RecipeCard>();
+    public List<RecipeCard> choppableRecipes = new List<RecipeCard>();
     public List<RecipeCard> seasoningRecipes = new List<RecipeCard>();
-    public List<RecipeCard> foodRecipes = new List<RecipeCard>();
+    public List<RecipeCard> knifeTools = new List<RecipeCard>();
+    public List<RecipeCard> fryingPanTools = new List<RecipeCard>();
 
     private void Awake()
     {
-        // Singleton pattern: keep one instance alive
+        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
@@ -26,32 +28,47 @@ public class RecipeSelectionDistributor : MonoBehaviour
 
     /// <summary>
     /// Call this once you have your 5 selected RecipeCard objects.
-    /// It will clear and then refill the three lists.
+    /// It will clear and refill the categorized lists.
     /// </summary>
     public void DistributeSelections(List<RecipeCard> selectedCards)
     {
-        toolRecipes.Clear();
+        cookableRecipes.Clear();
+        choppableRecipes.Clear();
         seasoningRecipes.Clear();
-        foodRecipes.Clear();
+        knifeTools.Clear();
+        fryingPanTools.Clear();
 
         foreach (var card in selectedCards)
         {
             switch (card.type)
             {
                 case RecipeType.Cookable:
-                    toolRecipes.Add(card);
+                    cookableRecipes.Add(card);
                     break;
+
+                case RecipeType.Choppable:
+                    choppableRecipes.Add(card);
+                    break;
+
                 case RecipeType.Seasoning:
                     seasoningRecipes.Add(card);
                     break;
-                case RecipeType.Choppable:
-                    foodRecipes.Add(card);
+
+                case RecipeType.Knife:
+                    knifeTools.Add(card);
+                    break;
+
+                case RecipeType.FryingPan:
+                    fryingPanTools.Add(card);
                     break;
             }
         }
 
-        Debug.Log($"Distributed: {toolRecipes.Count} tools, " +
-                  $"{seasoningRecipes.Count} seasonings, " +
-                  $"{foodRecipes.Count} foods.");
+        Debug.Log($"Distributed:\n" +
+                  $"- Cookables: {cookableRecipes.Count}\n" +
+                  $"- Choppables: {choppableRecipes.Count}\n" +
+                  $"- Seasonings: {seasoningRecipes.Count}\n" +
+                  $"- Knives: {knifeTools.Count}\n" +
+                  $"- Frying Pans: {fryingPanTools.Count}");
     }
 }

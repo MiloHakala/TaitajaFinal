@@ -20,6 +20,13 @@ public class ListButtonSpawner : MonoBehaviour
     [Header("Spawn settings")]
     public Transform spawnParent;
 
+    [Header("Cooking Settings")]
+    public FryingPan fryingPan;
+    public Transform fryingLocation;
+    public Transform choppingLocation;
+
+    public KitchenManager kitchenManager;
+
     void Start()
     {
         var dist = RecipeSelectionDistributor.Instance;
@@ -29,13 +36,13 @@ public class ListButtonSpawner : MonoBehaviour
             return;
         }
 
-        allSelected = dist.toolRecipes
-                       .Cast<RecipeCard>()
-                       .Concat(dist.seasoningRecipes)
-                       .Concat(dist.foodRecipes)
-                       .ToList();
+        allSelected = dist.cookableRecipes
+               .Concat(dist.choppableRecipes)
+               .Concat(dist.seasoningRecipes)
+               .Concat(dist.fryingPanTools)
+               .Concat(dist.knifeTools)
+               .ToList();
 
-        // spawn the initial 5 using gridButtonPrefab
         spawnedButtons = new List<GameObject>();
         for (int i = 0; i < allSelected.Count && i < 5; i++)
         {
@@ -55,25 +62,20 @@ public class ListButtonSpawner : MonoBehaviour
     {
         if (allSelected.Count < 2 || spawnedButtons.Count < 2) return;
 
-        // clear any existing picks
         foreach (Transform t in pickedParent)
             Destroy(t.gameObject);
 
-        // take first two cards
         var firstCard = allSelected[0];
         var secondCard = allSelected[1];
 
-        // spawn them under the picked grid
         SpawnPickedButton(firstCard);
         SpawnPickedButton(secondCard);
 
-        // rotate your data list
         allSelected.RemoveAt(0);
         allSelected.RemoveAt(0);
         allSelected.Add(firstCard);
         allSelected.Add(secondCard);
 
-        // rotate your button list and their sibling order
         var btn0 = spawnedButtons[0];
         var btn1 = spawnedButtons[1];
         spawnedButtons.RemoveAt(0);
@@ -81,36 +83,102 @@ public class ListButtonSpawner : MonoBehaviour
         spawnedButtons.Add(btn0);
         spawnedButtons.Add(btn1);
 
-        // move those two in the hierarchy to the bottom so GridLayoutGroup re‐positions them
         btn0.transform.SetAsLastSibling();
         btn1.transform.SetAsLastSibling();
 
-        // update all labels
         RefreshButtons();
     }
-    /*
+
     private void SpawnPickedButton(RecipeCard card)
     {
+        if (card == null)
+        {
+            Debug.LogWarning("RecipeCard is null.");
+            return;
+        }
+
         var go = Instantiate(pickedButtonPrefab, pickedParent);
+
+        // Check if button and label components are found
+        var button = go.GetComponent<Button>();
+        if (button == null)
+        {
+            Debug.LogError("Button component missing from picked button prefab.");
+            return;
+        }
+
         var label = go.GetComponentInChildren<TextMeshProUGUI>();
         if (label != null)
             label.text = card.recipeName;
-    }*/
 
-    private void SpawnPickedButton(RecipeCard card)
-    {
-        var go = Instantiate(pickedButtonPrefab, pickedParent);
+        // Check for null in prefab
+        if (card.prefabToSpawn == null)
+        {
+            Debug.LogWarning($"No prefab to spawn for: {card.recipeName}");
+            return;
+        }
 
-        var button = go.GetComponent<PickedCardButton>();
-        if (button != null)
+        button.onClick.AddListener(() =>
         {
-            button.Setup(card, spawnParent); // assign data and hook up click
-        }
-        else
-        {
-            Debug.LogWarning("PickedButtonPrefab is missing the PickedCardButton component.");
-        }
+            if (kitchenManager == null)
+            {
+                Debug.LogWarning("KitchenManager is not assigned.");
+                return;
+            }
+
+            switch (card.type)
+            {
+                case RecipeType.FryingPan:
+                    kitchenManager.hasFryingPan = true;
+                    kitchenManager.UpdateKitchenStations();
+                    Debug.Log("Frying Pan acquired and activated.");
+                    return;
+
+                case RecipeType.Knife:
+                    kitchenManager.hasKnife = true;
+                    kitchenManager.UpdateKitchenStations();
+                    Debug.Log("Knife acquired and activated.");
+                    return;
+
+                case RecipeType.Cookable:
+                    // Check if the frying pan is available and has the correct spot
+                    FryingPan fryingPan = kitchenManager.GetFryingPan();
+                    if (fryingPan == null || fryingPan.fryingSpot == null)
+                    {
+                        Debug.LogWarning("Frying Pan or frying spot not assigned.");
+                        return;
+                    }
+
+                    GameObject cooked = Instantiate(card.prefabToSpawn, fryingPan.fryingSpot.position, Quaternion.identity);
+                    cooked.transform.SetParent(fryingPan.fryingSpot);
+                    fryingPan.isFrying = true;
+                    Debug.Log($"Started frying {card.recipeName}");
+                    break;
+
+                case RecipeType.Choppable:
+                    // Check if the chopping location is available
+                    Transform chopLocation = kitchenManager.GetChoppingLocation();
+                    if (chopLocation == null)
+                    {
+                        Debug.LogWarning("Knife not acquired. Cannot chop.");
+                        return;
+                    }
+
+                    GameObject chopped = Instantiate(card.prefabToSpawn, chopLocation.position, Quaternion.identity);
+                    chopped.transform.SetParent(chopLocation);
+                    Debug.Log($"Chopped: {card.recipeName}");
+                    break;
+
+                default:
+                    Debug.LogWarning($"Unknown RecipeType for {card.recipeName}");
+                    break;
+            }
+        });
     }
+
+
+
+
 
     private void RefreshButtons()
     {

@@ -6,6 +6,8 @@ public class FryingPan : MonoBehaviour
     public AudioSource fryingSound; // Assign in Inspector
     private Animator animator;
 
+    public Transform fryingSpot;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -14,6 +16,12 @@ public class FryingPan : MonoBehaviour
         {
             Debug.LogError("FryingPan: No Animator component found!");
         }
+    }
+
+    public void FinishFrying()
+    {
+        isFrying = false;
+        Debug.Log("Frying done!");
     }
 
     void Update()
