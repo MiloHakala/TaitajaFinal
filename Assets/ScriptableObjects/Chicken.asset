@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 806e4224dc083e0479bbcc4e01188597, type: 3}
-  m_Name: Soup
+  m_Name: Chicken
   m_EditorClassIdentifier: 
-  recipeName: Soup
+  recipeName: Chicken
   cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  type: 1
+  prefabToSpawn: {fileID: 2001574639482858766, guid: 7589a759d86b69144928d47f250cd0b2, type: 3}

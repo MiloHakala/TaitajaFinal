@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardImage: {fileID: 372547833207060798}
   cardLabel: {fileID: 8777463911086103058}
-  cardData: {fileID: 11400000, guid: 26bf7f678ecb9484399a1ddfe2f64e56, type: 2}
+  cardData: {fileID: 0}
 --- !u!114 &264555332681731880
 MonoBehaviour:
   m_ObjectHideFlags: 0
