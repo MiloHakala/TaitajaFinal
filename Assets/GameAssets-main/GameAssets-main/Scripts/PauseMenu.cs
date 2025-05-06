@@ -6,23 +6,14 @@ using System.Collections;
 
 public class PauseMenu : MonoBehaviour
 {
+    public string mainMenuName;
+
     [Header("Panel References")]
     public GameObject pauseMenuUI;    // Contains Resume, Options, Main Menu, Quit buttons
-    public GameObject optionsPanelUI; // Parent panel for options (left navigation and right content area)
-    public GameObject glitch;
-
-    [Header("Category Content Panels (Right Side)")]
-    public GameObject videoPanel;
-    public GameObject controlsPanel;
-    public GameObject displayPanel;
-    public GameObject audioPanel;
-    public GameObject accessibilityPanel;
+    public GameObject howToPlayPanel;
 
     [Header("Pause Menu Elements")]
-    public Button[] pauseButtons;               // Pause menu buttons in order
-
-    [Header("Options Panel Elements (Left Side Navigation)")]
-    public Button[] optionsButtons;             // Options navigation buttons (Video, Controls, Display, Audio, Accessibility, Back)
+    public Button[] pauseButtons;// Pause menu buttons in order
 
     [Header("Animation Settings")]
     public float moveOffset = 20f;       // How far right the selected button slides
@@ -42,18 +33,14 @@ public class PauseMenu : MonoBehaviour
     // Stored original positions and scales for each menu (using anchoredPosition)
     private Vector2[] pauseOriginalPositions;
     private Vector3[] pauseOriginalScales;
-    private Vector2[] optionsOriginalPositions;
-    private Vector3[] optionsOriginalScales;
 
     private bool isPaused = false;
-    private bool inOptions = false;
 
     void Start()
     {
         // Disable panels at start.
         pauseMenuUI.SetActive(false);
-        optionsPanelUI.SetActive(false);
-        glitch.SetActive(false);
+        howToPlayPanel.SetActive(false);
 
         // Store original positions/scales for pause menu buttons.
         if (pauseButtons.Length > 0)
@@ -67,19 +54,6 @@ public class PauseMenu : MonoBehaviour
                 pauseOriginalScales[i] = rt.localScale;
             }
         }
-
-        // Store original positions/scales for options navigation buttons.
-        if (optionsButtons.Length > 0)
-        {
-            optionsOriginalPositions = new Vector2[optionsButtons.Length];
-            optionsOriginalScales = new Vector3[optionsButtons.Length];
-            for (int i = 0; i < optionsButtons.Length; i++)
-            {
-                RectTransform rt = optionsButtons[i].GetComponent<RectTransform>();
-                optionsOriginalPositions[i] = rt.anchoredPosition;
-                optionsOriginalScales[i] = rt.localScale;
-            }
-        }
     }
 
     void Update()
@@ -87,11 +61,7 @@ public class PauseMenu : MonoBehaviour
         // Toggle pause with Escape.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused && inOptions)
-            {
-                ShowPauseMenu();
-            }
-            else if (isPaused && !inOptions)
+            if (isPaused)
             {
                 Resume();
             }
@@ -162,12 +132,6 @@ public class PauseMenu : MonoBehaviour
         {
             buttonHoverSource.PlayOneShot(hoverClip);
         }
-
-        // In options panel, update the right-side content based on selection.
-        if (inOptions)
-        {
-            UpdateCategoryContent();
-        }
     }
 
     // Animates a button’s anchoredPosition and scale.
@@ -194,11 +158,8 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         isPaused = true;
-        inOptions = false;
         Time.timeScale = 0f; // Pause game time (animations use unscaled time)
         pauseMenuUI.SetActive(true);
-        glitch.SetActive(true);
-        optionsPanelUI.SetActive(false);
 
         // Set current menu arrays to pause menu.
         currentButtons = pauseButtons;
@@ -218,45 +179,14 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        optionsPanelUI.SetActive(false);
-        glitch.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    public void ShowOptions()
-    {
-        inOptions = true;
-        pauseMenuUI.SetActive(false);
-        optionsPanelUI.SetActive(true);
-
-        // Hide all category panels initially.
-        if (videoPanel) videoPanel.SetActive(false);
-        if (controlsPanel) controlsPanel.SetActive(false);
-        if (displayPanel) displayPanel.SetActive(false);
-        if (audioPanel) audioPanel.SetActive(false);
-        if (accessibilityPanel) accessibilityPanel.SetActive(false);
-
-        // Set current menu arrays to options navigation buttons.
-        currentButtons = optionsButtons;
-        currentOriginalPositions = new Vector2[optionsButtons.Length];
-        currentOriginalScales = new Vector3[optionsButtons.Length];
-        for (int i = 0; i < optionsButtons.Length; i++)
-        {
-            RectTransform rt = optionsButtons[i].GetComponent<RectTransform>();
-            currentOriginalPositions[i] = optionsOriginalPositions[i];
-            currentOriginalScales[i] = optionsOriginalScales[i];
-        }
-        selectedIndex = 0;
-        UpdateSelection();
-        EventSystem.current.SetSelectedGameObject(currentButtons[selectedIndex].gameObject);
-    }
-
     public void ShowPauseMenu()
     {
-        inOptions = false;
         pauseMenuUI.SetActive(true);
-        optionsPanelUI.SetActive(false);
+        howToPlayPanel.SetActive(false);
 
         currentButtons = pauseButtons;
         currentOriginalPositions = new Vector2[pauseButtons.Length];
@@ -272,89 +202,22 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(currentButtons[selectedIndex].gameObject);
     }
 
-    private void PlayGlitchEffect()
-    {
-        if (glitch != null && glitch.activeInHierarchy)
-        {
-            // Manually call the Update method of GlitchEffect using unscaled time.
-            glitch.GetComponent<GlitchEffect>().Update();  // Call Update directly, as it's already using unscaled time in its own Update method.
-        }
-    }
-
     // --- Button Methods for Pause Menu ---
     public void OnResume() { Resume(); }
-    public void OnOptions() { ShowOptions(); }
     public void OnMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(mainMenuName);
     }
-    public void OnQuit() { Application.Quit(); }
-
-    // --- Button Methods for Options Panel (Left Navigation) ---
-    public void OnVideo()
+    public void OnHowToPlay()
     {
-        if (videoPanel) videoPanel.SetActive(true);
-        if (controlsPanel) controlsPanel.SetActive(false);
-        if (displayPanel) displayPanel.SetActive(false);
-        if (audioPanel) audioPanel.SetActive(false);
-        if (accessibilityPanel) accessibilityPanel.SetActive(false);
+        howToPlayPanel.SetActive(true);
+        pauseMenuUI.SetActive(false);
     }
-    public void OnControls()
-    {
-        if (controlsPanel) controlsPanel.SetActive(true);
-        if (videoPanel) videoPanel.SetActive(false);
-        if (displayPanel) displayPanel.SetActive(false);
-        if (audioPanel) audioPanel.SetActive(false);
-        if (accessibilityPanel) accessibilityPanel.SetActive(false);
-    }
-    public void OnDisplay()
-    {
-        if (displayPanel) displayPanel.SetActive(true);
-        if (videoPanel) videoPanel.SetActive(false);
-        if (controlsPanel) controlsPanel.SetActive(false);
-        if (audioPanel) audioPanel.SetActive(false);
-        if (accessibilityPanel) accessibilityPanel.SetActive(false);
-    }
-    public void OnAudio()
-    {
-        if (audioPanel) audioPanel.SetActive(true);
-        if (videoPanel) videoPanel.SetActive(false);
-        if (controlsPanel) controlsPanel.SetActive(false);
-        if (displayPanel) displayPanel.SetActive(false);
-        if (accessibilityPanel) accessibilityPanel.SetActive(false);
-    }
-    public void OnAccessibility()
-    {
-        if (accessibilityPanel) accessibilityPanel.SetActive(true);
-        if (videoPanel) videoPanel.SetActive(false);
-        if (controlsPanel) controlsPanel.SetActive(false);
-        if (displayPanel) displayPanel.SetActive(false);
-        if (audioPanel) audioPanel.SetActive(false);
+    public void OnQuit() 
+    { 
+        Application.Quit();
+        print("Quitting...");
     }
     public void OnBack() { ShowPauseMenu(); }
-
-    // In the options panel, update the right-side content based on the current selection.
-    void UpdateCategoryContent()
-    {
-        if (selectedIndex < 5)
-        {
-            switch (selectedIndex)
-            {
-                case 0: OnVideo(); break;
-                case 1: OnControls(); break;
-                case 2: OnDisplay(); break;
-                case 3: OnAudio(); break;
-                case 4: OnAccessibility(); break;
-            }
-        }
-        else
-        {
-            if (videoPanel) videoPanel.SetActive(false);
-            if (controlsPanel) controlsPanel.SetActive(false);
-            if (displayPanel) displayPanel.SetActive(false);
-            if (audioPanel) audioPanel.SetActive(false);
-            if (accessibilityPanel) accessibilityPanel.SetActive(false);
-        }
-    }
 }
