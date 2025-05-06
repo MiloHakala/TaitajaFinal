@@ -470,6 +470,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &606086245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2641066092921186128, guid: ec2ac12e11aad074aa7886a577209286, type: 3}
+  m_PrefabInstance: {fileID: 4630014164406304957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &616527307
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +505,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d21d2e479254c64995afde865fe8056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderList:
+  - salad
+  - beef(Raw)
+  - beef(Medium)
+  - beef(WellDone)
+  - chicken(Raw)
+  - chicken(Medium)
+  - chicken(WellDone)
+  - salt
+  - pepper
   orderBoxPrefab: {fileID: 1073633616312185970, guid: 4c4bf0780293cf44c84383a00e47d346, type: 3}
   topPanel: {fileID: 342725538}
   orderSpacing: 500
@@ -865,7 +880,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a49e92451b2b5346904a39520d8debf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodOnPlate: []
+  foodOnPlate:
+  - {fileID: 1695299640}
+  - {fileID: 606086245}
+  - {fileID: 629208137}
   levelManager: {fileID: 0}
 --- !u!1 &1161712955
 GameObject:
@@ -1831,6 +1849,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1695299640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 464521583735151572, guid: b893a93b03158e84abb2bc4a8632c7bd, type: 3}
+  m_PrefabInstance: {fileID: 5667876900038536556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1993921354
 GameObject:
   m_ObjectHideFlags: 0
