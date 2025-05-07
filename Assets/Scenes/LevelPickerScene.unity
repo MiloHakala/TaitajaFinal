@@ -1420,14 +1420,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1637614144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de3c361ed066ebe49b225d2302c8a3b8, type: 3}
+  m_Script: {fileID: 11500000, guid: e19ba08dbb19b2a4abf2d81a314f94c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
+  moneyText: {fileID: 0}
   selectedCard: {fileID: 0}
   recipeCards: []
   allRecipeCards:
-  - {fileID: 11400000, guid: 6a15b02a39bee0741bfcd8dbf59374b7, type: 2}
   - {fileID: 11400000, guid: 8396dfb231463434d9353e95db3b25eb, type: 2}
+  - {fileID: 11400000, guid: 6a15b02a39bee0741bfcd8dbf59374b7, type: 2}
   playerScore: 0
   currentLevel: 
 --- !u!1 &1680967715

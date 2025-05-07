@@ -24,6 +24,7 @@ public class RecipeButtonSpawner : MonoBehaviour
     }
     public void ShowCards()
     {
+        print("show cards");
         if (GameManager.Instance.recipeCards.Count > 0)
         {
             Debug.Log("Cards selected, loading level...");

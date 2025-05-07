@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
 
     public int money = 0;
     public TextMeshProUGUI moneyText;
+    public RecipeCard selectedCard;
+    public List<RecipeCard> recipeCards = new List<RecipeCard>(); // Selected cards
+    public List<RecipeCard> allRecipeCards = new List<RecipeCard>(); // All available cards
+
+    public int playerScore;
+    public string currentLevel;
 
     void Awake()
     {
@@ -26,7 +32,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             AddMoney(100);
     }
+    public void SetSelectedCard(RecipeCard card)
+    {
+        selectedCard = card;
 
+    }
     public void AddMoney(int amount)
     {
         money += amount;
