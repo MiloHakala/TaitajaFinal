@@ -9,6 +9,9 @@ TagManager:
   - salad
   - salt
   - pepper
+  - UpgradeButton
+  - Beef
+  - Chicken
   layers:
   - Default
   - TransparentFX

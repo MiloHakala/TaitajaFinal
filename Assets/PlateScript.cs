@@ -25,15 +25,15 @@ public class PlateScript : MonoBehaviour
             {
                 string foodName;
                 string tag = food.tag;
-                if (tag == "chicken")
+                if (tag == "Chicken")
                 {
                     MeatPrefab foodScript = food.GetComponent<MeatPrefab>();
-                    foodName = "chicken(" + foodScript.currentState + ")";
+                    foodName = "Chicken(" + foodScript.currentState + ")";
                 }
-                else if (tag == "beef")
+                else if (tag == "Beef")
                 {
                     MeatPrefab foodScript = food.GetComponent<MeatPrefab>();
-                    foodName = "beef(" + foodScript.currentState + ")";
+                    foodName = "Beef(" + foodScript.currentState + ")";
                 }
                 else
                 {

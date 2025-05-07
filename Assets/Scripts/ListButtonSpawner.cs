@@ -20,6 +20,9 @@ public class ListButtonSpawner : MonoBehaviour
     [Header("Button Prefabs by Tag")]
     public List<TaggedButtonPrefab> buttonPrefabs;  // All possible button prefabs, keyed by tag
 
+    [Header("Upgrade Overlay")]
+    public GameObject upgradeButtonPrefab;      // small overlay button prefab (tagged "UpgradeButton")
+
     // runtime data
     private List<RecipeCard> allSelected;
     private List<GameObject> spawnedButtons;
@@ -89,26 +92,31 @@ public class ListButtonSpawner : MonoBehaviour
     {
         if (allSelected.Count < 2 || spawnedButtons.Count < 2) return;
 
+        // clear previous picked
         foreach (Transform t in pickedParent)
             Destroy(t.gameObject);
 
+        // grab first two cards
         var firstCard = allSelected[0];
         var secondCard = allSelected[1];
 
+        // spawn their buttons
         SpawnPickedButton(firstCard);
         SpawnPickedButton(secondCard);
 
-        // rotate data & buttons
+        // rotate data list
         allSelected.RemoveRange(0, 2);
         allSelected.Add(firstCard);
         allSelected.Add(secondCard);
 
+        // rotate button list
         var btn0 = spawnedButtons[0];
         var btn1 = spawnedButtons[1];
         spawnedButtons.RemoveRange(0, 2);
         spawnedButtons.Add(btn0);
         spawnedButtons.Add(btn1);
 
+        // ensure they render on top in grid (if needed)
         btn0.transform.SetAsLastSibling();
         btn1.transform.SetAsLastSibling();
 
@@ -126,11 +134,43 @@ public class ListButtonSpawner : MonoBehaviour
         }
         var go = Instantiate(template, pickedParent);
 
+        // set label & click
         var button = go.GetComponent<Button>();
         var label = go.GetComponentInChildren<TextMeshProUGUI>();
         if (label != null) label.text = card.recipeName;
-
         button.onClick.AddListener(() => OnPickedButtonClicked(card));
+
+        // overlay an upgrade button on each picked button
+        var up = Instantiate(upgradeButtonPrefab, go.transform);
+        up.tag = "UpgradeButton"; 
+        var rt = up.GetComponent<RectTransform>();
+        // position above main button (adjust Y offset as needed)
+        rt.anchorMin = new Vector2(0.5f, 1f);
+        rt.anchorMax = new Vector2(0.5f, 1f);
+        rt.pivot     = new Vector2(0.5f, 0f);
+        rt.anchoredPosition = new Vector2(0, 10); // 10px above
+
+        var upBtn = up.GetComponent<Button>();
+        upBtn.onClick.AddListener(() => OnUpgradeClicked(card));
+    }
+
+    private void OnUpgradeClicked(RecipeCard card)
+    {
+        // set upgrade globally for all matching ItemData assets
+        var allItems = Resources.FindObjectsOfTypeAll<ItemData>();
+        foreach (var item in allItems)
+        {
+            if (item.tag == card.tag)
+                item.moneyUpgradeAcquired = true;
+        }
+        Debug.Log($"Global upgrade acquired for all '{card.tag}' items.");
+
+        // remove all upgrade overlay buttons
+        var upgrades = pickedParent.GetComponentsInChildren<Transform>()
+                       .Where(t => t.CompareTag("UpgradeButton"))
+                       .Select(t => t.gameObject).ToList();
+        foreach (var u in upgrades)
+            Destroy(u);
     }
 
     private void OnPickedButtonClicked(RecipeCard card)
@@ -142,10 +182,12 @@ public class ListButtonSpawner : MonoBehaviour
                 kitchenManager.hasFryingPan = true;
                 kitchenManager.UpdateKitchenStations();
                 break;
+
             case RecipeType.Knife:
                 kitchenManager.hasKnife = true;
                 kitchenManager.UpdateKitchenStations();
                 break;
+
             case RecipeType.Cookable:
                 var pan = kitchenManager.GetFryingPan();
                 if (pan != null && !pan.isFrying)
@@ -155,6 +197,7 @@ public class ListButtonSpawner : MonoBehaviour
                     pan.isFrying = true;
                 }
                 break;
+
             case RecipeType.Choppable:
                 var loc = kitchenManager.GetChoppingLocation();
                 if (loc != null)
