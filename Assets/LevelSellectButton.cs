@@ -14,6 +14,10 @@ public class RecipeButtonSpawner : MonoBehaviour
     public string levelName;
     public TextMeshProUGUI infoText;
     public string levelToLoad;
+    public AudioSource audioSource;
+    
+
+
 
     private Dictionary<RecipeCard, GameObject> cardButtonMap = new Dictionary<RecipeCard, GameObject>();
     private List<RecipeCard> selectedCards = new List<RecipeCard>();
@@ -21,17 +25,41 @@ public class RecipeButtonSpawner : MonoBehaviour
     private void Start()
     {
         infoText.enabled = false; // Hide info text at start
+        
+        
     }
     public void ShowCards()
     {
-        print("show cards");
-        if (GameManager.Instance.recipeCards.Count > 0)
+        if (levelName == "Level 2")
         {
-            Debug.Log("Cards selected, loading level...");
-            LoadLevel();
+            if (GameManager.Instance.level2Locked)
+            {
+                infoText.text = "Level 2 is locked. Please complete Level 1 to unlock it.";
+                infoText.enabled = true;
+                return;
+            }
         }
-        else
+        if (levelName == "Level 3")
         {
+            if (GameManager.Instance.level3Locked && GameManager.Instance.level2Locked)
+            {
+                infoText.text = "Level 3 is locked. Please complete Level 1 and 2 to unlock it.";
+                infoText.enabled = true;
+                return;
+            }
+            else if (GameManager.Instance.level3Locked)
+            {
+                infoText.text = "Level 3 is locked. Please complete Level 2 to unlock it.";
+                infoText.enabled = true;
+                return;
+            }
+        }
+
+        print("show cards");
+        if (GameManager.Instance.currentLevel != levelName)
+        {
+            print("loading Cards");
+            GameManager.Instance.currentLevel = levelName; // Set the current level name in GameManager
             infoText.enabled = true; // Hide info text at start
             infoText.text = "sellect the Cocking thechniques cards for  " + levelName + ". After choosing card press level button again to start upt the level";
             // Clear old buttons and selection
@@ -46,6 +74,7 @@ public class RecipeButtonSpawner : MonoBehaviour
             {
                 GameObject newButton = Instantiate(buttonPrefab, spawnParent);
 
+
                 RectTransform rect = newButton.GetComponent<RectTransform>();
                 rect.anchoredPosition = startPosition + i * offset;
 
@@ -53,6 +82,11 @@ public class RecipeButtonSpawner : MonoBehaviour
 
                 TextMeshProUGUI buttonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
                 buttonText.text = cardData.recipeName;
+                Image imageComponent = newButton.GetComponentInChildren<Image>();
+                if (imageComponent != null && cardData.cardImage != null)
+                {
+                    imageComponent.sprite = cardData.cardImage;
+                }
 
                 Button btn = newButton.GetComponent<Button>();
                 btn.onClick.AddListener(() => ToggleCardSelection(cardData, newButton));
@@ -60,6 +94,19 @@ public class RecipeButtonSpawner : MonoBehaviour
                 cardButtonMap[cardData] = newButton;
             }
         }
+        else
+        {
+            if (GameManager.Instance.recipeCards.Count > 0)
+            {
+                Debug.Log("Cards selected, loading level...");
+                LoadLevel();
+            }
+            else
+            {
+                infoText.text = "Please select at least one card before proceeding.";
+            }
+        }
+       
         
     }
 
@@ -91,6 +138,8 @@ public class RecipeButtonSpawner : MonoBehaviour
         // Make sure the levelToLoad is set to a valid scene name
         if (!string.IsNullOrEmpty(levelToLoad))
         {
+            GameObject music = GameObject.FindGameObjectWithTag("MainMenuMusicPlayer");
+            Destroy(music);
             SceneManager.LoadScene(levelToLoad);
         }
         else

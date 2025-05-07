@@ -12,6 +12,9 @@ TagManager:
   - stove
   - plate
   - choppingArea
+  - Beef
+  - UpgradeButton
+  - MainMenuMusicPlayer
   layers:
   - Default
   - TransparentFX

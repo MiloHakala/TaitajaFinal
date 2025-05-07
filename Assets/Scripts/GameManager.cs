@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public int playerScore;
     public string currentLevel;
 
+    public bool level2Locked = true; // Example variable to lock/unlock level 2
+    public bool level3Locked = true; // Example variable to lock/unlock level 3
     void Awake()
     {
         if (Instance == null) Instance = this;

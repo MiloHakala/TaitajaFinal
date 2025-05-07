@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806e4224dc083e0479bbcc4e01188597, type: 3}
   m_Name: ChoppingArea
   m_EditorClassIdentifier: 
-  recipeName: ChoppingArea
-  cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  recipeName: 
+  cardImage: {fileID: 21300000, guid: baceea28ec92c414bbada0eb0673458a, type: 3}
   type: 0
   tag: 
   prefabToSpawn: {fileID: 5233149016302285724, guid: 5f5bf3fdae8830747a162da7b43f00ee, type: 3}
