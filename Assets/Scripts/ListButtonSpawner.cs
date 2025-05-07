@@ -22,11 +22,13 @@ public class ListButtonSpawner : MonoBehaviour
 
     // runtime data
     private List<RecipeCard> allSelected;
-    private List<GameObject> spawnedGridButtons;
-    private List<RecipeCard> currentPicks;
+    private List<GameObject> spawnedButtons;
 
     // internal lookup
     private Dictionary<string, GameObject> prefabMap;
+
+    // number of cards to pick each time
+    private const int PickCount = 4;
 
     void Start()
     {
@@ -41,8 +43,6 @@ public class ListButtonSpawner : MonoBehaviour
             Debug.LogError("No RecipeSelectionDistributor found!");
             return;
         }
-
-        // build the deck
         allSelected = dist.cookableRecipes
                        .Concat(dist.choppableRecipes)
                        .Concat(dist.seasoningRecipes)
@@ -50,24 +50,18 @@ public class ListButtonSpawner : MonoBehaviour
                        .Concat(dist.knifeTools)
                        .ToList();
 
-        spawnedGridButtons = new List<GameObject>();
-        currentPicks = new List<RecipeCard>();
-
-        // spawn grid buttons for first up to 5 cards
-        for (int i = 0; i < allSelected.Count && i < 5; i++)
+        spawnedButtons = new List<GameObject>();
+        for (int i = 0; i < allSelected.Count && i < 10; i++)
         {
             SpawnGridButton(allSelected[i]);
         }
-
-        // initial draw of two pick cards
-        DrawInitialPicks();
-        RefreshGridLabels();
+        RefreshButtons();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            ResetPicks();
+            PickFirstFour();
     }
 
     private void SpawnGridButton(RecipeCard card)
@@ -78,34 +72,36 @@ public class ListButtonSpawner : MonoBehaviour
             return;
         }
         var go = Instantiate(template, gridParent);
-        spawnedGridButtons.Add(go);
+        spawnedButtons.Add(go);
     }
 
-    private void DrawInitialPicks()
+    private void PickFirstFour()
     {
-        // clear any existing picks
+        if (allSelected.Count < PickCount || spawnedButtons.Count < PickCount) return;
+
+        // Clear previously picked
         foreach (Transform t in pickedParent)
             Destroy(t.gameObject);
 
-        currentPicks.Clear();
+        // Grab the top N cards
+        var picks = allSelected.Take(PickCount).ToList();
 
-        // draw two cards from deck
-        for (int i = 0; i < 2 && allSelected.Count > 0; i++)
-        {
-            RecipeCard draw = allSelected[0];
-            allSelected.RemoveAt(0);
-            currentPicks.Add(draw);
-            SpawnPickedButton(draw);
-        }
-    }
+        // Display each picked card
+        foreach (var card in picks)
+            SpawnPickedButton(card);
 
-    private void ResetPicks()
-    {
-        // put current picks back to bottom in order
-        foreach (var card in currentPicks)
-            allSelected.Add(card);
-        DrawInitialPicks();
-        RefreshGridLabels();
+        // Move those cards to bottom of deck
+        allSelected.RemoveRange(0, PickCount);
+        allSelected.AddRange(picks);
+
+        // Cycle the corresponding grid buttons
+        var btns = spawnedButtons.Take(PickCount).ToList();
+        spawnedButtons.RemoveRange(0, PickCount);
+        spawnedButtons.AddRange(btns);
+        foreach (var btn in btns)
+            btn.transform.SetAsLastSibling();
+
+        RefreshButtons();
     }
 
     private void SpawnPickedButton(RecipeCard card)
@@ -122,61 +118,36 @@ public class ListButtonSpawner : MonoBehaviour
         var button = go.GetComponent<Button>();
         var label = go.GetComponentInChildren<TextMeshProUGUI>();
         if (label != null) label.text = card.recipeName;
-
-        // on click, handle pick usage and replacement
-        button.onClick.AddListener(() => OnPickedButtonClicked(card, go));
+        button.onClick.AddListener(() => OnPickedButtonClicked(card));
     }
 
-    private void OnPickedButtonClicked(RecipeCard card, GameObject buttonGO)
+    private void OnPickedButtonClicked(RecipeCard card)
     {
-        // perform the card's action
-        HandleCardAction(card);
-
-        // remove the clicked pick button
-        Destroy(buttonGO);
-
-        // remove this card from current picks
-        currentPicks.Remove(card);
-
-        // move used card to bottom of deck
-        allSelected.Add(card);
-
-        // draw one new card from top of deck
-        if (allSelected.Count > 0)
+        Debug.Log($"Button clicked for tag: {card.tag}");
+        if (card.tag == "Fryingpan")
         {
-            RecipeCard newDraw = allSelected[0];
-            allSelected.RemoveAt(0);
-            currentPicks.Add(newDraw);
-            SpawnPickedButton(newDraw);
+            GameObject.FindGameObjectWithTag("stove").GetComponent<stove>().spawnPan();
         }
-
-        RefreshGridLabels();
-    }
-
-    private void HandleCardAction(RecipeCard card)
-    {
-        switch (card.tag)
+        else if (card.tag == "Beef")
         {
-            case "Fryingpan":
-                GameObject.FindGameObjectWithTag("stove").GetComponent<stove>().spawnPan();
-                break;
-            case "Beef":
-                GameObject.FindGameObjectWithTag("stove").GetComponent<stove>().SpawnBeef();
-                break;
-            case "Chicken":
-                GameObject.FindGameObjectWithTag("stove").GetComponent<stove>().SpawnChicken();
-                break;
-            case "Letuce":
-                GameObject.FindGameObjectWithTag("choppingArea").GetComponent<ChoppingBlock>().SpawnLetuce();
-                break;
+            GameObject.FindGameObjectWithTag("stove").GetComponent<stove>().SpawnBeef();
         }
+        else if (card.tag == "Chicken")
+        {
+            GameObject.FindGameObjectWithTag("stove").GetComponent<stove>().SpawnChicken();
+        }
+        else if (card.tag == "Letuce")
+        {
+            GameObject.FindGameObjectWithTag("choppingArea").GetComponent<ChoppingBlock>().SpawnLetuce();
+        }
+        RefreshButtons();
     }
 
-    private void RefreshGridLabels()
+    private void RefreshButtons()
     {
-        for (int i = 0; i < spawnedGridButtons.Count; i++)
+        for (int i = 0; i < spawnedButtons.Count; i++)
         {
-            var label = spawnedGridButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            var label = spawnedButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             if (label != null && i < allSelected.Count)
                 label.text = allSelected[i].recipeName;
         }
