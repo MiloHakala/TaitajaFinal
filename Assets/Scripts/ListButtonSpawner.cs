@@ -79,8 +79,9 @@ public class ListButtonSpawner : MonoBehaviour
         spawnedButtons.Add(go);
     }
 
-    private void PickFirstFour()
+    public void PickFirstFour()
     {
+        MoneyManager.Instance.Spend(10);
         if (allSelected.Count < PickCount || spawnedButtons.Count < PickCount) return;
 
         // Clear previously picked
