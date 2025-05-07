@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class MeatPrefab : MonoBehaviour
 {
     public enum MeatState
@@ -12,13 +11,13 @@ public class MeatPrefab : MonoBehaviour
         WellDone,
         Burnt
     }
+
     public enum MeatType
     {
         Chicken,
-        Beef,
-        //Pork,
-        //Fish
+        Beef
     }
+
     public GameObject rawSprite;
     public GameObject mediumSprite;
     public GameObject wellDoneSprite;
@@ -26,42 +25,59 @@ public class MeatPrefab : MonoBehaviour
 
     public MeatState currentState = MeatState.Raw;
     public MeatType currentType = MeatType.Chicken;
-    // Start is called before the first frame update
+
+    public float cookInterval = 5f; // Time between states
+    private float cookTimer = 0f;
+    private bool isCooking = false;
+
     void Start()
     {
-        
+        UpdateVisuals(); // show correct sprite at start
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (currentState == MeatState.Raw)
+        if (!isCooking) return;
+
+        cookTimer += Time.deltaTime;
+
+        if (cookTimer >= cookInterval)
         {
-            rawSprite.SetActive(true);
-            mediumSprite.SetActive(false);
-            wellDoneSprite.SetActive(false);
-            burntSprite.SetActive(false);
+            cookTimer = 0f;
+            AdvanceCookState();
         }
-        else if (currentState == MeatState.Medium)
+    }
+
+    void AdvanceCookState()
+    {
+        if (currentState < MeatState.Burnt)
         {
-            rawSprite.SetActive(false);
-            mediumSprite.SetActive(true);
-            wellDoneSprite.SetActive(false);
-            burntSprite.SetActive(false);
+            currentState++;
+            UpdateVisuals();
+            Debug.Log($"{currentType} is now {currentState}");
         }
-        else if (currentState == MeatState.WellDone)
+        else
         {
-            rawSprite.SetActive(false);
-            mediumSprite.SetActive(false);
-            wellDoneSprite.SetActive(true);
-            burntSprite.SetActive(false);
+            isCooking = false; // Stop cooking after Burnt
         }
-        else if (currentState == MeatState.Burnt)
-        {
-            rawSprite.SetActive(false);
-            mediumSprite.SetActive(false);
-            wellDoneSprite.SetActive(false);
-            burntSprite.SetActive(true);
-        }
+    }
+
+    void UpdateVisuals()
+    {
+        rawSprite.SetActive(currentState == MeatState.Raw);
+        mediumSprite.SetActive(currentState == MeatState.Medium);
+        wellDoneSprite.SetActive(currentState == MeatState.WellDone);
+        burntSprite.SetActive(currentState == MeatState.Burnt);
+    }
+
+    public void StartCooking()
+    {
+        isCooking = true;
+        cookTimer = 0f;
+    }
+
+    public void StopCooking()
+    {
+        isCooking = false;
     }
 }

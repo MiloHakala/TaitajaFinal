@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CardPickerScene.unity
     guid: 2c550df22077b834684e14eac02bd581
+  - enabled: 1
+    path: Assets/Scenes/LevelPickerScene.unity
+    guid: 8c40b7c83da77dd4ea1a3a400826a47a
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: d54cdcee026b98240a7b29dc9c1b119f
   m_configObjects: {}

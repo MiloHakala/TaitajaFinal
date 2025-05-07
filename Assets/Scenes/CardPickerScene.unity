@@ -839,7 +839,7 @@ MonoBehaviour:
     prefab: {fileID: 1694978588055009007, guid: 58aea569f22651a4d9e1cc3e91390c81, type: 3}
   - tag: Beef
     prefab: {fileID: 1694978588055009007, guid: 9fbae446043a3384dae5245916649594, type: 3}
-  gameScene: GameScene
+  gameScene: Level1
   distributor: {fileID: 1822412720}
 --- !u!4 &1437631661
 Transform:

@@ -532,7 +532,7 @@ MonoBehaviour:
   maxSelectableCards: 3
   levelName: Level 1
   infoText: {fileID: 197218291}
-  levelToLoad: 
+  levelToLoad: CardPickerScene
 --- !u!114 &552241722
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class CardSelectionManager : MonoBehaviour
     private Dictionary<string, GameObject> prefabMap;
     private List<CardDisplay> selectedCards = new List<CardDisplay>();
     private int maxSelections = 5;
-    public string gameScene = "GameScene";
+    public string gameScene = "Level1";
 
     [Header("Distributor")]
     public RecipeSelectionDistributor distributor;
@@ -124,4 +124,5 @@ public class CardSelectionManager : MonoBehaviour
         distributor.DistributeSelections(chosen);
         SceneManager.LoadScene(gameScene);
     }
+    
 }

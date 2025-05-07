@@ -9,6 +9,8 @@ TagManager:
   - salad
   - salt
   - pepper
+  - stove
+  - plate
   layers:
   - Default
   - TransparentFX
