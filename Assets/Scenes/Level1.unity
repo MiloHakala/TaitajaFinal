@@ -3369,14 +3369,10 @@ MonoBehaviour:
     prefab: {fileID: 1694978588055009007, guid: 9fbae446043a3384dae5245916649594, type: 3}
   - tag: Chicken
     prefab: {fileID: 1694978588055009007, guid: 58aea569f22651a4d9e1cc3e91390c81, type: 3}
-  - tag: Fryingpan
-    prefab: {fileID: 1694978588055009007, guid: abcfd5cc18ac14f4eafc5bbb3db83d61, type: 3}
-  - tag: Knife
-    prefab: {fileID: 1694978588055009007, guid: dfe2461b6f6c935449d8c59edf2902e1, type: 3}
-  - tag: Letuce
+  - tag: salad
     prefab: {fileID: 6190908907409381774, guid: e2a48a98ba6c431498484a884be66aec, type: 3}
-  upgradeButtonPrefab: {fileID: 202737887198824289, guid: fa4b7a1953cb085488c0c1abd9b64ba7, type: 3}
-  spawnParent: {fileID: 1480210815}
+  - tag: Fryingpan
+    prefab: {fileID: 5746609802632685966, guid: c46d671d1110ecc4f92d4fddbf3b6ea9, type: 3}
 --- !u!4 &1885024591
 Transform:
   m_ObjectHideFlags: 0

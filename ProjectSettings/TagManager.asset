@@ -15,6 +15,7 @@ TagManager:
   - Beef
   - UpgradeButton
   - MainMenuMusicPlayer
+  - Fryingpan
   layers:
   - Default
   - TransparentFX

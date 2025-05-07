@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 264555332681731880}
   - component: {fileID: 7017619034151046892}
   m_Layer: 5
-  m_Name: SoupPrefab
+  m_Name: SaladPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardImage: {fileID: 372547833207060798}
   cardLabel: {fileID: 8777463911086103058}
-  cardData: {fileID: 11400000, guid: 77032e5038582f74e8f6e8459da90b77, type: 2}
+  cardData: {fileID: 11400000, guid: a7c344681ad95c74d95459814176bb46, type: 2}
 --- !u!114 &7379124391201817791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22a9338df01d4d41b13c72838102bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeCard: {fileID: 11400000, guid: 77032e5038582f74e8f6e8459da90b77, type: 2}
+  recipeCard: {fileID: 11400000, guid: a7c344681ad95c74d95459814176bb46, type: 2}
 --- !u!114 &264555332681731880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 92490877d3acdfc43aa8e4224108a2ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
