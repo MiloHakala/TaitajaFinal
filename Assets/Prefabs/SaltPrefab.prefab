@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5718006336119911818}
   - component: {fileID: 2679897336825780069}
+  - component: {fileID: 5592796007150361521}
   m_Layer: 0
   m_Name: SaltPrefab
   m_TagString: salt
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5592796007150361521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842957114574239384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b938e72adde5a5f418d84dc953932df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: a18fe1df84540e548bbadc285ffedd78, type: 2}

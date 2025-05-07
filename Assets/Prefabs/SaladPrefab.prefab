@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1154622293113737870}
   - component: {fileID: 4423589035122852305}
   - component: {fileID: 7980108066619898810}
+  - component: {fileID: -6345004125897120432}
   m_Layer: 0
   m_Name: SaladPrefab
   m_TagString: salad
@@ -149,6 +150,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6345004125897120432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641066092921186128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b938e72adde5a5f418d84dc953932df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 3286a43779a4e73448c5c3ca2cf2a3f8, type: 2}
 --- !u!1 &3796202560170036304
 GameObject:
   m_ObjectHideFlags: 0

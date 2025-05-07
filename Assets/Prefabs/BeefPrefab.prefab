@@ -262,9 +262,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2409061279807121855}
   - component: {fileID: 8469415344336235885}
+  - component: {fileID: 437143241567519654}
   m_Layer: 0
   m_Name: BeefPrefab
-  m_TagString: beef
+  m_TagString: Beef
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -306,6 +307,19 @@ MonoBehaviour:
   burntSprite: {fileID: 7978829536105028366}
   currentState: 0
   currentType: 1
+--- !u!114 &437143241567519654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6555496278876485331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b938e72adde5a5f418d84dc953932df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: ffdcad02429272e4881a09dc9bce646f, type: 2}
 --- !u!1 &7978829536105028366
 GameObject:
   m_ObjectHideFlags: 0

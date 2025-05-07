@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1320929285886233012}
   - component: {fileID: 7679223362667790280}
   - component: {fileID: 9205754750547061262}
+  - component: {fileID: 4562950822897278542}
   m_Layer: 0
   m_Name: FryingPanPrefab
   m_TagString: Untagged
@@ -219,3 +220,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4562950822897278542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746609802632685966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b938e72adde5a5f418d84dc953932df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 4f0714b6cbeb057408fc746db8a45345, type: 2}
