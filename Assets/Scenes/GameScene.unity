@@ -1087,6 +1087,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d21d2e479254c64995afde865fe8056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderList:
+  - salad
+  - beef(Raw)
+  - beef(Medium)
+  - beef(WellDone)
+  - chicken(Raw)
+  - chicken(Medium)
+  - chicken(WellDone)
+  - salt
+  - pepper
   orderBoxPrefab: {fileID: 1073633616312185970, guid: 4c4bf0780293cf44c84383a00e47d346, type: 3}
   topPanel: {fileID: 342725538}
   orderSpacing: 500
@@ -2438,9 +2448,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridParent: {fileID: 801180706}
-  gridButtonPrefab: {fileID: 1995505296648659394, guid: b7a398a626dbe4b43a47996cd1e53c44, type: 3}
   pickedParent: {fileID: 1249630644}
-  pickedButtonPrefab: {fileID: 673338348581643940, guid: 6dc37eca1768ed0469b2b1337a73c6df, type: 3}
+  buttonPrefabs:
+  - tag: Beef
+    prefab: {fileID: 1694978588055009007, guid: 9fbae446043a3384dae5245916649594, type: 3}
+  - tag: Chicken
+    prefab: {fileID: 1694978588055009007, guid: 58aea569f22651a4d9e1cc3e91390c81, type: 3}
+  - tag: Fryingpan
+    prefab: {fileID: 1694978588055009007, guid: abcfd5cc18ac14f4eafc5bbb3db83d61, type: 3}
+  - tag: Knife
+    prefab: {fileID: 1694978588055009007, guid: dfe2461b6f6c935449d8c59edf2902e1, type: 3}
+  - tag: Soup
+    prefab: {fileID: 1694978588055009007, guid: 16a9f40d35e778a4d9fba786ca983978, type: 3}
   spawnParent: {fileID: 1377028079}
   fryingPan: {fileID: 967076833}
   fryingLocation: {fileID: 838753375}

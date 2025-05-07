@@ -17,6 +17,7 @@ public class RecipeCard : ScriptableObject
     public string recipeName;
     public Sprite cardImage;
     public RecipeType type;
+    public string tag; // Example values: "Beef", "Soup", "Fish"
 
     [Header("Runtime Spawn")]
     public GameObject prefabToSpawn;

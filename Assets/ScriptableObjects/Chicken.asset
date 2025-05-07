@@ -15,4 +15,5 @@ MonoBehaviour:
   recipeName: Chicken
   cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 1
+  tag: Chicken
   prefabToSpawn: {fileID: 3321338570404612536, guid: dc0980098a554cf4ca440a9a9cd1f2e0, type: 3}

@@ -15,4 +15,5 @@ MonoBehaviour:
   recipeName: Soup
   cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 0
+  tag: Soup
   prefabToSpawn: {fileID: 9051518427235978937, guid: 2f87094d0f4dba24292e4c707b2c933d, type: 3}

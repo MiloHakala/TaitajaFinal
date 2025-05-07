@@ -15,4 +15,5 @@ MonoBehaviour:
   recipeName: Fryingpan
   cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 4
+  tag: Fryingpan
   prefabToSpawn: {fileID: 8731485633073890201, guid: 95af597e027a1b34bacd0b62b9056a83, type: 3}

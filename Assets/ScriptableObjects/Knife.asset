@@ -15,4 +15,5 @@ MonoBehaviour:
   recipeName: Knife
   cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 3
+  tag: Knife
   prefabToSpawn: {fileID: 3312995045532741343, guid: 3675e0e14431deb478f2e374556c8f35, type: 3}

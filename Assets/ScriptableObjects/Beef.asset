@@ -15,4 +15,5 @@ MonoBehaviour:
   recipeName: Beef
   cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 1
+  tag: Beef
   prefabToSpawn: {fileID: 4553042490099395583, guid: 4624999d49ef1e044b537fac2198f1bb, type: 3}

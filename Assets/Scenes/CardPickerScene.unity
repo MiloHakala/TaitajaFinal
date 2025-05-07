@@ -820,7 +820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardGridParent: {fileID: 1344708286}
-  cardPrefab: {fileID: 1694978588055009007, guid: 9fbae446043a3384dae5245916649594, type: 3}
   allCards:
   - {fileID: 11400000, guid: 5cfc82a8b722c2640b4bed0e63fd256f, type: 2}
   - {fileID: 11400000, guid: 26bf7f678ecb9484399a1ddfe2f64e56, type: 2}
@@ -829,6 +828,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e860762a1584bf49b6dd428f31cbfdb, type: 2}
   infoText: {fileID: 2014332373}
   continueButton: {fileID: 1208695707}
+  cardPrefabs:
+  - tag: Soup
+    prefab: {fileID: 1694978588055009007, guid: 16a9f40d35e778a4d9fba786ca983978, type: 3}
+  - tag: Knife
+    prefab: {fileID: 1694978588055009007, guid: dfe2461b6f6c935449d8c59edf2902e1, type: 3}
+  - tag: Fryingpan
+    prefab: {fileID: 1694978588055009007, guid: abcfd5cc18ac14f4eafc5bbb3db83d61, type: 3}
+  - tag: Chicken
+    prefab: {fileID: 1694978588055009007, guid: 58aea569f22651a4d9e1cc3e91390c81, type: 3}
+  - tag: Beef
+    prefab: {fileID: 1694978588055009007, guid: 9fbae446043a3384dae5245916649594, type: 3}
   gameScene: GameScene
   distributor: {fileID: 1822412720}
 --- !u!4 &1437631661
