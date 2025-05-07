@@ -4898,6 +4898,8 @@ MonoBehaviour:
     prefab: {fileID: 1694978588055009007, guid: 490ee406e5c189342936757651f03f05, type: 3}
   - tag: Pepper
     prefab: {fileID: 1694978588055009007, guid: 43e9c3accafef214eab5f66551a5f89a, type: 3}
+  saltPrefab: {fileID: 1842957114574239384, guid: d360d230b3dadd444991f0a1856bd439, type: 3}
+  pepperPrefab: {fileID: 5172215540047140781, guid: 84fc34d409c2ddf4386b8a4490d6a75e, type: 3}
 --- !u!4 &1885024591
 Transform:
   m_ObjectHideFlags: 0

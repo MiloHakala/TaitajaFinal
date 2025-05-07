@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 [System.Serializable]
 public class TaggedButtonPrefab
@@ -29,6 +30,9 @@ public class ListButtonSpawner : MonoBehaviour
 
     // number of cards to pick each time
     private const int PickCount = 4;
+
+    public GameObject saltPrefab;
+    public GameObject pepperPrefab;
 
     void Start()
     {
@@ -140,6 +144,24 @@ public class ListButtonSpawner : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("choppingArea").GetComponent<ChoppingBlock>().SpawnLetuce();
         }
+        else if (card.tag == "Salt")
+        {
+            GameObject plate = GameObject.FindGameObjectWithTag("plate");
+            GameObject pepper = Instantiate(saltPrefab, plate.transform);
+            pepper.transform.localPosition = new Vector3(0, 0, 0);
+            print("salt prefab spawned");
+
+            plate.GetComponent<PlateScript>().foodOnPlate.Add(pepper);
+        }
+        else if (card.tag == "Pepper")
+        {
+            GameObject plate = GameObject.FindGameObjectWithTag("plate");
+            GameObject pepper = Instantiate(pepperPrefab, plate.transform);
+            pepper.transform.localPosition = new Vector3(0, 0, 0);
+
+            plate.GetComponent<PlateScript>().foodOnPlate.Add(pepper);
+        }
+        
         RefreshButtons();
     }
 
