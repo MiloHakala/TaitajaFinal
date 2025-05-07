@@ -5,11 +5,6 @@ public class MoneyManager : MonoBehaviour
     public static MoneyManager Instance;
     public int money = 1000;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            Add(100);
-    }
     void Awake()
     {
         if (Instance == null)
