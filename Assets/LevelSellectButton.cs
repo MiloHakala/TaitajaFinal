@@ -14,7 +14,7 @@ public class RecipeButtonSpawner : MonoBehaviour
     public string levelName;
     public TextMeshProUGUI infoText;
     public string levelToLoad;
-    public AudioSource audioSource;
+    
     
 
 
@@ -138,8 +138,7 @@ public class RecipeButtonSpawner : MonoBehaviour
         // Make sure the levelToLoad is set to a valid scene name
         if (!string.IsNullOrEmpty(levelToLoad))
         {
-            GameObject music = GameObject.FindGameObjectWithTag("MainMenuMusicPlayer");
-            Destroy(music);
+            
             SceneManager.LoadScene(levelToLoad);
         }
         else

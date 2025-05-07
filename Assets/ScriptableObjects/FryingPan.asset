@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FryingPan
   m_EditorClassIdentifier: 
   recipeName: Fryingpan
-  cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  cardImage: {fileID: 21300000, guid: 01bcf52512d71a8469f8b569d7136a6c, type: 3}
   type: 4
   tag: Fryingpan
   prefabToSpawn: {fileID: 8731485633073890201, guid: 95af597e027a1b34bacd0b62b9056a83, type: 3}
