@@ -823,7 +823,6 @@ MonoBehaviour:
   allCards:
   - {fileID: 11400000, guid: 5cfc82a8b722c2640b4bed0e63fd256f, type: 2}
   - {fileID: 11400000, guid: 26bf7f678ecb9484399a1ddfe2f64e56, type: 2}
-  - {fileID: 11400000, guid: 77032e5038582f74e8f6e8459da90b77, type: 2}
   - {fileID: 11400000, guid: 525452623ecdd1f4bb4b52afa98606d0, type: 2}
   - {fileID: 11400000, guid: 0e860762a1584bf49b6dd428f31cbfdb, type: 2}
   infoText: {fileID: 2014332373}

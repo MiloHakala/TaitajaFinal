@@ -13,7 +13,7 @@ public class ItemLinker : MonoBehaviour
     public void OnSold()
     {
         int earned = itemData.SellAmount;
-        GameManager.Instance.AddMoney(earned);
+        MoneyManager.Instance.Add(earned);
         Debug.Log($"{itemData.tag} sold for ${earned}");
         Destroy(gameObject);
     }

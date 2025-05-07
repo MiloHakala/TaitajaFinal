@@ -20,6 +20,9 @@ public class ListButtonSpawner : MonoBehaviour
     [Header("Button Prefabs by Tag")]
     public List<TaggedButtonPrefab> buttonPrefabs;  // All possible button prefabs, keyed by tag
 
+    [Header("Upgrade Overlay")]
+    public GameObject upgradeButtonPrefab;      // small overlay button prefab (tagged "UpgradeButton")
+
     // runtime data
     private List<RecipeCard> allSelected;
     private List<GameObject> spawnedButtons;
@@ -28,11 +31,9 @@ public class ListButtonSpawner : MonoBehaviour
     public Transform spawnParent;               // fallback spawn parent
 
     [Header("Cooking Settings")]
-    public FryingPan fryingPan;
-    public Transform fryingLocation;
-    public Transform choppingLocation;
-
-    public KitchenManager kitchenManager;
+    //public FryingPan fryingPan;
+    //public Transform fryingLocation;
+    //public Transform choppingLocation;
 
     // internal lookup
     private Dictionary<string, GameObject> prefabMap;
@@ -89,26 +90,31 @@ public class ListButtonSpawner : MonoBehaviour
     {
         if (allSelected.Count < 2 || spawnedButtons.Count < 2) return;
 
+        // clear previous picked
         foreach (Transform t in pickedParent)
             Destroy(t.gameObject);
 
+        // grab first two cards
         var firstCard = allSelected[0];
         var secondCard = allSelected[1];
 
+        // spawn their buttons
         SpawnPickedButton(firstCard);
         SpawnPickedButton(secondCard);
 
-        // rotate data & buttons
+        // rotate data list
         allSelected.RemoveRange(0, 2);
         allSelected.Add(firstCard);
         allSelected.Add(secondCard);
 
+        // rotate button list
         var btn0 = spawnedButtons[0];
         var btn1 = spawnedButtons[1];
         spawnedButtons.RemoveRange(0, 2);
         spawnedButtons.Add(btn0);
         spawnedButtons.Add(btn1);
 
+        // ensure they render on top in grid (if needed)
         btn0.transform.SetAsLastSibling();
         btn1.transform.SetAsLastSibling();
 
@@ -119,6 +125,7 @@ public class ListButtonSpawner : MonoBehaviour
     {
         if (card == null) return;
 
+        // --- spawn the pick‐button as before ---
         if (!prefabMap.TryGetValue(card.tag, out GameObject template) || template == null)
         {
             Debug.LogWarning($"No button prefab for tag '{card.tag}'");
@@ -126,12 +133,55 @@ public class ListButtonSpawner : MonoBehaviour
         }
         var go = Instantiate(template, pickedParent);
 
+        // set label & click
         var button = go.GetComponent<Button>();
         var label = go.GetComponentInChildren<TextMeshProUGUI>();
         if (label != null) label.text = card.recipeName;
-
         button.onClick.AddListener(() => OnPickedButtonClicked(card));
+
+        // --- now spawn the upgrade button in the same parent ---
+        var up = Instantiate(upgradeButtonPrefab, pickedParent);
+        up.tag = "UpgradeButton";
+
+        // position it above its sibling pick-button
+        var goRt = go.GetComponent<RectTransform>();
+        var upRt = up.GetComponent<RectTransform>();
+        upRt.anchorMin = goRt.anchorMin;
+        upRt.anchorMax = goRt.anchorMax;
+        upRt.pivot = goRt.pivot;
+        upRt.sizeDelta = goRt.sizeDelta;
+        upRt.anchoredPosition = goRt.anchoredPosition + new Vector2(0, goRt.sizeDelta.y * 0.5f + 10f);
+
+        // set the TMP text child to "Upgrade: [ItemName]"
+        var upLabel = up.GetComponentInChildren<TextMeshProUGUI>();
+        if (upLabel != null)
+            upLabel.text = $"Upgrade: {card.recipeName}";
+
+        // hook its click
+        var upBtn = up.GetComponent<Button>();
+        upBtn.onClick.AddListener(() => OnUpgradeClicked(card));
     }
+
+
+    private void OnUpgradeClicked(RecipeCard card)
+    {
+        // set upgrade globally for all matching ItemData assets
+        var allItems = Resources.FindObjectsOfTypeAll<ItemData>();
+        foreach (var item in allItems)
+        {
+            if (item.tag == card.tag)
+                item.moneyUpgradeAcquired = true;
+        }
+        Debug.Log($"Global upgrade acquired for all '{card.tag}' items.");
+
+        // remove all upgrade overlay buttons
+        var upgrades = pickedParent.GetComponentsInChildren<Transform>()
+                       .Where(t => t.CompareTag("UpgradeButton"))
+                       .Select(t => t.gameObject).ToList();
+        foreach (var u in upgrades)
+            Destroy(u);
+    }
+
 
     private void OnPickedButtonClicked(RecipeCard card)
     {
