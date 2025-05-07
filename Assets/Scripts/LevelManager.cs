@@ -50,6 +50,8 @@ public class LevelManager : MonoBehaviour
     public Sprite starSprite;
     public TextMeshProUGUI timerInfo;
     public bool Completed = false;
+    public MoneyManager moneyManager;
+    public TextMeshProUGUI moneyText;
 
     private void Awake()
     {
@@ -60,8 +62,10 @@ public class LevelManager : MonoBehaviour
     {
         remainingTime = levelTime;
         currentStars = maxStars;
+        moneyManager = FindObjectOfType<MoneyManager>();
+        if (moneyManager == null)
+            Debug.LogError("No LevelManager in scene!");
 
-        
         completeCanvas.SetActive(false);
 
         StartCoroutine(LevelTimer());
@@ -153,8 +157,11 @@ public class LevelManager : MonoBehaviour
             stars = 0;
 
         }
+        GameManager.Instance.level2Locked = false;
+        GameManager.Instance.level3Locked = false;
+        moneyText.text = "Money: " + moneyManager.money.ToString();
 
-        
+
         completeCanvas.SetActive(true);
         timerInfo.text = "Completed In: " + (int)remainingTime + "s";
 
@@ -191,47 +198,58 @@ public class LevelManager : MonoBehaviour
 
     public int FindMatchingOrder(List<string> plateItems)
     {
-        var sortedPlate = plateItems.OrderBy(x => x).ToArray();
+        var sortedPlate = plateItems.Select(s => s.ToLower()).OrderBy(x => x).ToArray();
         for (int i = 0; i < activeOrderData.Count; i++)
         {
-            var ord = activeOrderData[i];
-            var sortedOrd = ord.OrderBy(x => x).ToArray();
-            if (sortedPlate.SequenceEqual(sortedOrd))
-                return i;
+            var ord = activeOrderData[i]
+                           .Select(s => s.ToLower())
+                           .OrderBy(x => x)
+                           .ToArray();
+            if (sortedPlate.SequenceEqual(ord))
+                Destroy(activeOrders[i]); // remove the order UI
+            return i;
         }
         return -1;
     }
 
     public void NewOrder(List<string> order, string message)
     {
+        // don't exceed max
         if (activeOrders.Count >= maxOrders)
             return;
 
+        // store the order’s data so FindMatchingOrder and CompleteOrder can see it
+        activeOrderData.Add(new List<string>(order));
+
+        // play sound
         if (orderSound != null)
         {
             audioSource.pitch = Random.Range(0.9f, 1.1f);
             audioSource.PlayOneShot(orderSound);
         }
 
+        // instantiate UI box
         GameObject newOrder = Instantiate(orderBoxPrefab, topPanel);
         newOrder.transform.SetAsLastSibling();
 
+        // position off‑screen then slide in
         RectTransform rect = newOrder.GetComponent<RectTransform>();
         Vector2 targetPos = new Vector2(activeOrders.Count * orderSpacing, 0f);
         rect.anchoredPosition = new Vector2(-500f, 0f);
 
+        // fill text
         TextMeshProUGUI text = newOrder.GetComponentInChildren<TextMeshProUGUI>();
         if (text != null)
         {
             var sb = new System.Text.StringBuilder();
             foreach (var item in order)
-            {
                 sb.AppendLine("• " + item);
-            }
             text.text = sb.ToString();
         }
 
         StartCoroutine(SlideToPositionEased(rect, targetPos, slideDuration));
+
+        // keep track of the UI box so we can delete it later
         activeOrders.Add(newOrder);
     }
 
