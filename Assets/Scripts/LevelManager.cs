@@ -5,6 +5,19 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
+    public List<string> orderList = new List<string>
+    {
+        "salad",
+        "beef(Raw)",
+        "beef(Medium)",
+        "beef(WellDone)",
+        "chicken(Raw)",
+        "chicken(Medium)",
+        "chicken(WellDone)",
+        "salt",
+        "pepper"
+    };
+
     public GameObject orderBoxPrefab;         // Prefab with Image + Text
     public RectTransform topPanel;            // The UI parent (anchor at top of screen)
     public float orderSpacing = 160f;         // Horizontal space between orders
@@ -20,8 +33,12 @@ public class LevelManager : MonoBehaviour
     {
         audioSource = gameObject.AddComponent<AudioSource>();
     }
+    public void Start()
+    {
+        
+    }
 
-    public void NewOrder(string message)
+    public void NewOrder(List<string> order, string message)
     {
         if (activeOrders.Count >= maxOrders)
             return;
@@ -71,5 +88,14 @@ public class LevelManager : MonoBehaviour
         }
 
         rect.anchoredPosition = target;
+    }
+    public void GenerateOrder()
+    {
+        int orderSize = Random.Range(1, 4);
+        for (int i = 0; i < orderSize; i++)
+        {
+            int orderIndex = Random.Range(0, orderList.Count);
+            // get random index from order list
+        }
     }
 }
