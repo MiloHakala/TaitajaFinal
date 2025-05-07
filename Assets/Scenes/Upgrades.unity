@@ -1020,7 +1020,7 @@ MonoBehaviour:
     prefab: {fileID: 619319085}
   - tag: Chicken
     prefab: {fileID: 1570532645}
-  - tag: Salad
+  - tag: Letuce
     prefab: {fileID: 1459714041}
   upgradeParent: {fileID: 1998527732}
   upgradeCost: 150
