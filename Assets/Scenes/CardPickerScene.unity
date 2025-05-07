@@ -763,8 +763,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -211}
-  m_SizeDelta: {x: 499.9823, y: 259.7984}
+  m_AnchoredPosition: {x: 0, y: -236.20831}
+  m_SizeDelta: {x: 499.9823, y: 209.3818}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1344708287
 MonoBehaviour:
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 75, y: 100}
-  m_Spacing: {x: 30, y: 20}
+  m_CellSize: {x: 75, y: 0}
+  m_Spacing: {x: 30, y: 125}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1437631659
@@ -824,20 +824,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5cfc82a8b722c2640b4bed0e63fd256f, type: 2}
   - {fileID: 11400000, guid: 26bf7f678ecb9484399a1ddfe2f64e56, type: 2}
   - {fileID: 11400000, guid: 525452623ecdd1f4bb4b52afa98606d0, type: 2}
-  - {fileID: 11400000, guid: 0e860762a1584bf49b6dd428f31cbfdb, type: 2}
+  - {fileID: 11400000, guid: a7c344681ad95c74d95459814176bb46, type: 2}
+  - {fileID: 11400000, guid: 855a5d86259f92b43ab40837b46907ff, type: 2}
+  - {fileID: 11400000, guid: 3ae7d599e5474914b8c823ebc9f273f5, type: 2}
   infoText: {fileID: 2014332373}
   continueButton: {fileID: 1208695707}
   cardPrefabs:
   - tag: Letuce
     prefab: {fileID: 1694978588055009007, guid: 16a9f40d35e778a4d9fba786ca983978, type: 3}
-  - tag: Knife
-    prefab: {fileID: 1694978588055009007, guid: dfe2461b6f6c935449d8c59edf2902e1, type: 3}
   - tag: Fryingpan
     prefab: {fileID: 1694978588055009007, guid: abcfd5cc18ac14f4eafc5bbb3db83d61, type: 3}
   - tag: Chicken
     prefab: {fileID: 1694978588055009007, guid: 58aea569f22651a4d9e1cc3e91390c81, type: 3}
   - tag: Beef
     prefab: {fileID: 1694978588055009007, guid: 9fbae446043a3384dae5245916649594, type: 3}
+  - tag: Pepper
+    prefab: {fileID: 1694978588055009007, guid: 43e9c3accafef214eab5f66551a5f89a, type: 3}
+  - tag: Salt
+    prefab: {fileID: 1694978588055009007, guid: 490ee406e5c189342936757651f03f05, type: 3}
+  selectedCards:
+  - {fileID: 5424437251069712808, guid: 9fbae446043a3384dae5245916649594, type: 3}
+  - {fileID: 5424437251069712808, guid: 58aea569f22651a4d9e1cc3e91390c81, type: 3}
+  - {fileID: 5424437251069712808, guid: abcfd5cc18ac14f4eafc5bbb3db83d61, type: 3}
+  - {fileID: 5424437251069712808, guid: 43e9c3accafef214eab5f66551a5f89a, type: 3}
+  - {fileID: 5424437251069712808, guid: 16a9f40d35e778a4d9fba786ca983978, type: 3}
+  - {fileID: 5424437251069712808, guid: 490ee406e5c189342936757651f03f05, type: 3}
   gameScene: Level1
   distributor: {fileID: 1822412720}
 --- !u!4 &1437631661
@@ -889,8 +900,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000076294, y: -74.9}
-  m_SizeDelta: {x: 526.8605, y: 68.158905}
+  m_AnchoredPosition: {x: -0.0000076294, y: -55.093475}
+  m_SizeDelta: {x: 526.8605, y: 28.5458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1784680394
 MonoBehaviour:

@@ -23,8 +23,8 @@ public class CardSelectionManager : MonoBehaviour
     public List<TaggedCardPrefab> cardPrefabs;
 
     private Dictionary<string, GameObject> prefabMap;
-    private List<CardDisplay> selectedCards = new List<CardDisplay>();
-    private int maxSelections = 5;
+    public List<CardDisplay> selectedCards = new List<CardDisplay>();
+    private int maxSelections = 11;
     public string gameScene = "Level1";
 
     [Header("Distributor")]
@@ -43,11 +43,11 @@ public class CardSelectionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn `count` cards by selecting random RecipeCard assets and instantiating
+    /// Spawn count cards by selecting random RecipeCard assets and instantiating
     /// the corresponding UI prefab from the tag lookup.
     /// </summary>
     /// <summary>
-    /// Spawn `count` cards by selecting random RecipeCard assets and instantiating
+    /// Spawn count cards by selecting random RecipeCard assets and instantiating
     /// the corresponding UI prefab from the tag lookup.
     /// </summary>
     void SpawnRandomCards(int count)
@@ -124,5 +124,5 @@ public class CardSelectionManager : MonoBehaviour
         distributor.DistributeSelections(chosen);
         SceneManager.LoadScene(gameScene);
     }
-    
+
 }

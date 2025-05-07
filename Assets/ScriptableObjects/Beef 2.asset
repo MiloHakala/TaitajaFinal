@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 806e4224dc083e0479bbcc4e01188597, type: 3}
-  m_Name: Salad
+  m_Name: Beef 2
   m_EditorClassIdentifier: 
-  recipeName: salad
-  cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  type: 2
-  tag: salad
-  prefabToSpawn: {fileID: 3321338570404612536, guid: dc0980098a554cf4ca440a9a9cd1f2e0, type: 3}
+  recipeName: Beef
+  cardImage: {fileID: 21300000, guid: ecfa1e946418fd0409ac8e7b4b48365d, type: 3}
+  type: 1
+  tag: Beef
+  prefabToSpawn: {fileID: 4553042490099395583, guid: 4624999d49ef1e044b537fac2198f1bb, type: 3}
