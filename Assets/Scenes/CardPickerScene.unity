@@ -825,11 +825,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 26bf7f678ecb9484399a1ddfe2f64e56, type: 2}
   - {fileID: 11400000, guid: 525452623ecdd1f4bb4b52afa98606d0, type: 2}
   - {fileID: 11400000, guid: 0e860762a1584bf49b6dd428f31cbfdb, type: 2}
+  - {fileID: 11400000, guid: a7c344681ad95c74d95459814176bb46, type: 2}
   infoText: {fileID: 2014332373}
   continueButton: {fileID: 1208695707}
   cardPrefabs:
-  - tag: Soup
-    prefab: {fileID: 1694978588055009007, guid: 16a9f40d35e778a4d9fba786ca983978, type: 3}
   - tag: Knife
     prefab: {fileID: 1694978588055009007, guid: dfe2461b6f6c935449d8c59edf2902e1, type: 3}
   - tag: Fryingpan
