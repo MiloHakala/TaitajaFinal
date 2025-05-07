@@ -62,11 +62,7 @@ public class ListButtonSpawner : MonoBehaviour
         RefreshButtons();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            PickFirstFour();
-    }
+    
 
     private void SpawnGridButton(RecipeCard card)
     {
