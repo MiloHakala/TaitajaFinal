@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &69909487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6555496278876485331, guid: c7155ef3477c3cc4abe70392a512505f, type: 3}
+  m_PrefabInstance: {fileID: 7569284857683323584}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &169394783
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +889,8 @@ MonoBehaviour:
   - {fileID: 1695299640}
   - {fileID: 606086245}
   - {fileID: 629208137}
-  levelManager: {fileID: 0}
+  - {fileID: 69909487}
+  levelManager: {fileID: 616527308}
 --- !u!1 &1161712955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -377}
+  m_AnchoredPosition: {x: 348, y: -377}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440086351
@@ -1237,8 +1243,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 616527308}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: NewOrder
-        m_Mode: 5
+        m_MethodName: GenerateOrder
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2376,6 +2382,10 @@ PrefabInstance:
     - target: {fileID: 6555496278876485331, guid: c7155ef3477c3cc4abe70392a512505f, type: 3}
       propertyPath: m_Name
       value: BeefPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469415344336235885, guid: c7155ef3477c3cc4abe70392a512505f, type: 3}
+      propertyPath: currentState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

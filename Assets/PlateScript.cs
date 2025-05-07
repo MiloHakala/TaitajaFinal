@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,32 +19,44 @@ public class PlateScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // build the plate contents list
             List<string> allFoodOnPlate = new List<string>();
             foreach (GameObject food in foodOnPlate)
             {
-                
                 string foodName;
                 string tag = food.tag;
                 if (tag == "chicken")
                 {
                     MeatPrefab foodScript = food.GetComponent<MeatPrefab>();
-                    Debug.Log("chicken " + foodScript.currentState);
-                    foodName = "chicken " + foodScript.currentState;
+                    foodName = "chicken(" + foodScript.currentState + ")";
                 }
                 else if (tag == "beef")
                 {
                     MeatPrefab foodScript = food.GetComponent<MeatPrefab>();
-                    Debug.Log("beef " + foodScript.currentState);
-                    foodName = "beef " + foodScript.currentState;
+                    foodName = "beef(" + foodScript.currentState + ")";
                 }
                 else
                 {
-                    Debug.Log(tag);
                     foodName = tag;
                 }
+
                 allFoodOnPlate.Add(foodName);
-                print("Food on plate: " + string.Join(", ", allFoodOnPlate));
             }
+
+            // *** INSERT MATCH‑CHECK HERE ***
+            Debug.Log("Food on plate: " + string.Join(", ", allFoodOnPlate));
+
+            int match = levelManager.FindMatchingOrder(allFoodOnPlate);
+            if (match >= 0)
+            {
+                Debug.Log($"✅ Plate matches order number {match + 1}");
+            }
+            else
+            {
+                Debug.Log("❌ Plate does NOT match any order; clearing plate contents.");
+                allFoodOnPlate.Clear();
+            }
+            // *** END INSERT ***
 
         }
     }
