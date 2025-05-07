@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -145,11 +145,11 @@ GameObject:
   - component: {fileID: 8890450893525240988}
   - component: {fileID: 5813155624545624265}
   - component: {fileID: 5424437251069712808}
-  - component: {fileID: -2400403084788819781}
+  - component: {fileID: 1700790796320488241}
   - component: {fileID: 264555332681731880}
   - component: {fileID: 7017619034151046892}
   m_Layer: 5
-  m_Name: KnifePrefab
+  m_Name: SaltPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,8 +198,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardImage: {fileID: 372547833207060798}
   cardLabel: {fileID: 8777463911086103058}
-  cardData: {fileID: 11400000, guid: 0e860762a1584bf49b6dd428f31cbfdb, type: 2}
---- !u!114 &-2400403084788819781
+  cardData: {fileID: 11400000, guid: 3ae7d599e5474914b8c823ebc9f273f5, type: 2}
+--- !u!114 &1700790796320488241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22a9338df01d4d41b13c72838102bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeCard: {fileID: 11400000, guid: 0e860762a1584bf49b6dd428f31cbfdb, type: 2}
+  recipeCard: {fileID: 11400000, guid: 3ae7d599e5474914b8c823ebc9f273f5, type: 2}
 --- !u!114 &264555332681731880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5893568771923612204
 CanvasRenderer:
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 1904539631, guid: 36f9b95d3719b9e49abf2adbeb448a0f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

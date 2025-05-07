@@ -16,6 +16,7 @@ TagManager:
   - UpgradeButton
   - MainMenuMusicPlayer
   - Fryingpan
+  - Letuce
   layers:
   - Default
   - TransparentFX
