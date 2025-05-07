@@ -827,6 +827,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7c344681ad95c74d95459814176bb46, type: 2}
   - {fileID: 11400000, guid: 855a5d86259f92b43ab40837b46907ff, type: 2}
   - {fileID: 11400000, guid: 3ae7d599e5474914b8c823ebc9f273f5, type: 2}
+  - {fileID: 11400000, guid: 9fe05f7a58680b342b653deceeac075c, type: 2}
   infoText: {fileID: 2014332373}
   continueButton: {fileID: 1208695707}
   cardPrefabs:
@@ -842,6 +843,8 @@ MonoBehaviour:
     prefab: {fileID: 1694978588055009007, guid: 43e9c3accafef214eab5f66551a5f89a, type: 3}
   - tag: Salt
     prefab: {fileID: 1694978588055009007, guid: 490ee406e5c189342936757651f03f05, type: 3}
+  - tag: Fryingpan
+    prefab: {fileID: 1694978588055009007, guid: 7c5e26441739f1d42b6a5b7846eba0b1, type: 3}
   selectedCards:
   - {fileID: 5424437251069712808, guid: 9fbae446043a3384dae5245916649594, type: 3}
   - {fileID: 5424437251069712808, guid: 58aea569f22651a4d9e1cc3e91390c81, type: 3}
@@ -849,6 +852,7 @@ MonoBehaviour:
   - {fileID: 5424437251069712808, guid: 43e9c3accafef214eab5f66551a5f89a, type: 3}
   - {fileID: 5424437251069712808, guid: 16a9f40d35e778a4d9fba786ca983978, type: 3}
   - {fileID: 5424437251069712808, guid: 490ee406e5c189342936757651f03f05, type: 3}
+  - {fileID: 5424437251069712808, guid: 7c5e26441739f1d42b6a5b7846eba0b1, type: 3}
   gameScene: Level1
   distributor: {fileID: 1822412720}
 --- !u!4 &1437631661

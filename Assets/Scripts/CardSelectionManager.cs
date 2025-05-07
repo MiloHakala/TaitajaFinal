@@ -24,7 +24,7 @@ public class CardSelectionManager : MonoBehaviour
 
     private Dictionary<string, GameObject> prefabMap;
     public List<CardDisplay> selectedCards = new List<CardDisplay>();
-    private int maxSelections = 11;
+    private int maxSelections = 12;
     public string gameScene = "Level1";
 
     [Header("Distributor")]
