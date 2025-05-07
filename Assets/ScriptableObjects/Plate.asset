@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 806e4224dc083e0479bbcc4e01188597, type: 3}
-  m_Name: Soup
+  m_Name: Plate
   m_EditorClassIdentifier: 
-  recipeName: Letuce
-  cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  type: 2
-  tag: Letuce
-  prefabToSpawn: {fileID: 6190908907409381774, guid: e2a48a98ba6c431498484a884be66aec, type: 3}
+  recipeName: Plate
+  cardImage: {fileID: 0}
+  type: 4
+  tag: Plate
+  prefabToSpawn: {fileID: 7047756231305985878, guid: 3ec39f42994df6543a0e077da7b51501, type: 3}

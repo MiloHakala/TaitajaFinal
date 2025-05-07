@@ -11,6 +11,7 @@ TagManager:
   - pepper
   - stove
   - plate
+  - choppingArea
   layers:
   - Default
   - TransparentFX

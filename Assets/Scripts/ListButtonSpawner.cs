@@ -136,34 +136,59 @@ public class ListButtonSpawner : MonoBehaviour
     private void OnPickedButtonClicked(RecipeCard card)
     {
         Debug.Log($"Button clicked for tag: {card.tag}");
-        switch (card.type)
+        if (card.tag == "Fryingpan")
         {
-            case RecipeType.FryingPan:
-                kitchenManager.hasFryingPan = true;
-                kitchenManager.UpdateKitchenStations();
-                break;
-            case RecipeType.Knife:
-                kitchenManager.hasKnife = true;
-                kitchenManager.UpdateKitchenStations();
-                break;
-            case RecipeType.Cookable:
-                var pan = kitchenManager.GetFryingPan();
-                if (pan != null && !pan.isFrying)
-                {
-                    var cooked = Instantiate(card.prefabToSpawn, fryingLocation.position, Quaternion.identity);
-                    cooked.transform.SetParent(fryingLocation);
-                    pan.isFrying = true;
-                }
-                break;
-            case RecipeType.Choppable:
-                var loc = kitchenManager.GetChoppingLocation();
-                if (loc != null)
-                {
-                    var chopped = Instantiate(card.prefabToSpawn, choppingLocation.position, Quaternion.identity);
-                    chopped.transform.SetParent(choppingLocation);
-                }
-                break;
+            GameObject stoveObj = GameObject.FindGameObjectWithTag("stove");
+            stove stoveScript = stoveObj.GetComponent<stove>();
+            stoveScript.spawnPan();
         }
+        else if (card.tag == "Beef")
+        {
+            GameObject stoveObj = GameObject.FindGameObjectWithTag("stove");
+            stove stoveScript = stoveObj.GetComponent<stove>();
+            stoveScript.SpawnBeef();
+        }
+        else if (card.tag == "Chicken")
+        {
+            GameObject stoveObj = GameObject.FindGameObjectWithTag("stove");
+            stove stoveScript = stoveObj.GetComponent<stove>();
+            stoveScript.SpawnChicken();
+        }
+        else if (card.tag == "Letuce")
+        {
+            GameObject stoveObj = GameObject.FindGameObjectWithTag("choppingArea");
+            ChoppingBlock choppingBlock = stoveObj.GetComponent<ChoppingBlock>();
+            choppingBlock.SpawnLetuce();
+        }
+        RefreshButtons();
+        /*switch (card.type)
+            {
+                case RecipeType.FryingPan:
+                    kitchenManager.hasFryingPan = true;
+                    kitchenManager.UpdateKitchenStations();
+                    break;
+                case RecipeType.Knife:
+                    kitchenManager.hasKnife = true;
+                    kitchenManager.UpdateKitchenStations();
+                    break;
+                case RecipeType.Cookable:
+                    var pan = kitchenManager.GetFryingPan();
+                    if (pan != null && !pan.isFrying)
+                    {
+                        var cooked = Instantiate(card.prefabToSpawn, fryingLocation.position, Quaternion.identity);
+                        cooked.transform.SetParent(fryingLocation);
+                        pan.isFrying = true;
+                    }
+                    break;
+                case RecipeType.Choppable:
+                    var loc = kitchenManager.GetChoppingLocation();
+                    if (loc != null)
+                    {
+                        var chopped = Instantiate(card.prefabToSpawn, choppingLocation.position, Quaternion.identity);
+                        chopped.transform.SetParent(choppingLocation);
+                    }
+                    break;
+            }*/
     }
 
     private void RefreshButtons()

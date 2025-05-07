@@ -22,6 +22,9 @@ public class stove : MonoBehaviour
     public bool trigger1 = false;
     public GameObject plate;
     public PlateScript plateScript;
+
+    public AudioSource audi;
+    public AudioSource audi2;
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +95,10 @@ public class stove : MonoBehaviour
             }
             
         }
+        if (!isPanOnStove)
+        {
+            Debug.Log("No pan on stove!");
+        }
     }
     public void SpawnBeef()
     {
@@ -107,6 +114,10 @@ public class stove : MonoBehaviour
                 meat.StartCooking();
             }
             
+        }
+        if (!isPanOnStove)
+        {
+            Debug.Log("No pan on stove!");
         }
 
     }
@@ -136,6 +147,7 @@ public class stove : MonoBehaviour
             isPanOnStove = false;
             sotveOnUse = false;
             currentMeatPrefab = null;
+            audi.Play();
         }
     }
     public void discardMeat()
@@ -152,6 +164,7 @@ public class stove : MonoBehaviour
             sotveOnUse = false;
 
             Debug.Log("Meat discarded.");
+            audi2.Play();
         }
     }
 

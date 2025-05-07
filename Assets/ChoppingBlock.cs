@@ -12,6 +12,7 @@ public class ChoppingBlock : MonoBehaviour
     public GameObject CurrentLetuce;
     public GameObject plate;
     public PlateScript plateScript;
+    public AudioSource audi;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class ChoppingBlock : MonoBehaviour
         }
     }
 
-    void SpawnLetuce()
+    public void SpawnLetuce()
     {
         if (!isLettuceOnBlock)
         {
@@ -56,7 +57,7 @@ public class ChoppingBlock : MonoBehaviour
             // Right click (destroy meat only)
             if (Input.GetMouseButtonDown(1))
             {
-                discard();
+                Discard();
             }
         }
         // Left click (submit meat to plate)
@@ -64,20 +65,22 @@ public class ChoppingBlock : MonoBehaviour
     }
     void submit()
     {
-        if (isLettuceOnBlock && !isChopped)
+        if (isLettuceOnBlock && isChopped)
         {
             CurrentLetuce.transform.SetParent(plate.transform);
-            MeatPrefab meat = CurrentLetuce.GetComponent<MeatPrefab>();
-            meat.StopCooking();
+            
+            
 
             // Optionally reposition it relative to the plate
-            CurrentLetuce.transform.localPosition = new Vector3(-3.5f, 0.85f, 0); // adjust as needed
+            CurrentLetuce.transform.localPosition = new Vector3(0.03f, 0.13f, 0); // adjust as needed
 
 
             // Add to plate's script list
             plateScript.foodOnPlate.Add(CurrentLetuce);
             isLettuceOnBlock = false;
 
+            audi.Play();
+            isChopped = false;
 
 
 

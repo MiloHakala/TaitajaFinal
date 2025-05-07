@@ -15,4 +15,5 @@ MonoBehaviour:
   recipeName: ChoppingArea
   cardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 0
-  prefabToSpawn: {fileID: 1221913967183231363, guid: e0d5c8373b6dbe547aff821d4122ccc3, type: 3}
+  tag: 
+  prefabToSpawn: {fileID: 5233149016302285724, guid: 5f5bf3fdae8830747a162da7b43f00ee, type: 3}
